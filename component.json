@@ -1,7 +1,6 @@
 {
   "name": "jpegmeta",
-  "version": "1.0",
-  "main": ["jpegmeta.js"],
+  "version": "1.0.0",
   "author": "ben.leslie@gmail.com",
   "description": "Javascript JPEG Metadata Reader",
   "homepage": "https://github.com/seanpdoyle/jpegmeta",
