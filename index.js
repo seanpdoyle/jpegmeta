@@ -416,6 +416,7 @@ this.JpegMeta.JpegFile.prototype._exiftags = {
     41986 : ["Exposure Mode", "Exposure Mode"],
     41987 : ["White Balance", "WhiteBalance"],
     41988 : ["Digital Zoom Ratio", "DigitalZoomRatio"],
+    41989 : ["Focal Length 35mm Equivalent", "FocalLengthIn35mmFilm"],
     41990 : ["Scene Capture Type", "SceneCaptureType"],
     41991 : ["Gain Control", "GainControl"],
     41992 : ["Contrast", "Contrast"],
@@ -626,16 +627,21 @@ this.JpegMeta.JpegFile.prototype._parseIfd = function _parseIfd(endian, _binary_
         den = JpegMeta.parseSnum(endian, _binary_data, value_offset + 4, 4);
         value.push(new JpegMeta.Rational(num, den));
     }
+    
     value.push();
-      }
-      if (num_values === 1) {
-    value = value[0];
-      }
-  }
-    var tag = tags[tag_field];
-    if (tag && tag.length >= 2) {
-        group._addProperty(tag[1], tag[0], value);
     }
+      
+    if (num_values === 1) {
+      value = value[0];
+    }
+    }
+    if (tags[tag_field]) {
+        group._addProperty(tags[tag_field][1], tags[tag_field][0], value);
+    }
+    else {
+        group._addProperty('__UNKNOWN__'+tag_field, tag_field, value);
+    }
+
     }
 }
 
